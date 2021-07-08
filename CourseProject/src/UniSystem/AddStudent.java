@@ -38,7 +38,6 @@ public class AddStudent extends javax.swing.JFrame {
         GPAError.setVisible(false);
         cmbGender.addItem("Male");
         cmbGender.addItem("Female");
-        txtStanding.setEditable(false); //Standing is calculated from credits
     }
 
     void clearInputBoxes() {
@@ -223,6 +222,7 @@ public class AddStudent extends javax.swing.JFrame {
         Name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Name.setText("NAME:");
 
+        txtStanding.setEditable(false);
         txtStanding.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtStanding.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,7 +438,7 @@ public class AddStudent extends javax.swing.JFrame {
 
             if (isValidData()) {
                 findStanding();
-                prepStatement = mycon.getCon().prepareStatement("INSERT INTO students (sid, name, major, gender, start_sem, credits, standing, GPA) VALUES (? , ? , ?, ? , ? , ?, ?, ?)");
+                prepStatement = mycon.getCon().prepareStatement("INSERT INTO students (sid, name, major, sex, start_sem, credits, standing, GPA) VALUES (? , ? , ?, ? , ? , ?, ?, ?)");
                 prepStatement.setInt(1, Integer.parseInt(txtID.getText()));
                 prepStatement.setString(2, txtName.getText());
                 prepStatement.setString(3, txtMajor.getText());
