@@ -26,8 +26,8 @@ public class AddCourseProf extends javax.swing.JFrame {
      * Creates new form AddEmployee
      */
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00061555";
-    String DBPASS = "b00061555";
+    String DBUSER = "b00085023";
+    String DBPASS = "b00085023";
 
     Connection con;
     Statement statement;
@@ -43,10 +43,10 @@ public class AddCourseProf extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = statement.executeQuery("SELECT * FROM course");
+            rs = statement.executeQuery("SELECT * FROM courses");
             // populate Course combo box
             while (rs.next()) {
-                cmbCourse.addItem(rs.getString("Code"));
+                cmbCourse.addItem(rs.getString("Course_code"));
             }
 
             rs.close();
@@ -169,7 +169,7 @@ public class AddCourseProf extends javax.swing.JFrame {
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             
             
-            prepStatement = con.prepareStatement("INSERT INTO prof_course (ProfID,Course Code) VALUES(?,?) ");
+            prepStatement = con.prepareStatement("INSERT INTO professors_courses (PID,Course_Code) VALUES(?,?) ");
             prepStatement.setInt(1, currUser);
             prepStatement.setString(2, cmbCourse.getSelectedItem().toString());
             
