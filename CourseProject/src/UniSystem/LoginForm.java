@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 public class LoginForm extends javax.swing.JFrame {
 
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00085023";
-    String DBPASS = "b00085023";
+    String DBUSER = "b00061555";
+    String DBPASS = "b00061555";
 
     boolean validLogin = false;
 
@@ -144,9 +144,11 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
-            rs=statement.executeQuery("SELECT username, password, type FROM USERS "  
-                    + "WHERE username = '"+txtUsername.getText().trim()
-                    + "' AND password = '" + txtPassword.getText().trim()+"'");
+            rs=statement.executeQuery(
+                    "SELECT username, password, type FROM USERS "  
+                    + "WHERE username = '" + txtUsername.getText().trim()
+                    + "' AND password = '" + txtPassword.getText().trim() + "'"
+            );
             rs.beforeFirst();
             if (rs.next()) {
                 //Find out who logged in and open the respective menus:

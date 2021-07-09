@@ -30,11 +30,14 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         IDError.setVisible(false);
         NameError.setVisible(false);
-        MajorError.setVisible(false);
         AdmitTermError.setVisible(false);
         CreditsError.setVisible(false);
         StandingError.setVisible(false);
         GPAError.setVisible(false);
+        cmbMajor.addItem("CAAD");
+        cmbMajor.addItem("SBA");
+        cmbMajor.addItem("CAS");
+        cmbMajor.addItem("CEN");
         cmbGender.addItem("Male");
         cmbGender.addItem("Female");
         getNewData();
@@ -44,7 +47,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
 
         try {
             String str;
-            rs = mycon.getstate().executeQuery("SELECT *  FROM STUDENTS ORDER BY sid ASC ");
+            rs = mycon.getstate().executeQuery("SELECT * FROM STUDENTS ORDER BY sid ASC ");
             rs.beforeFirst();
             rs.first();
             populateFields();
@@ -59,7 +62,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         try {
             txtID.setText(rs.getString("sid"));
             txtName.setText(rs.getString("name"));
-            txtMajor.setText(rs.getString("major"));
+            cmbMajor.setSelectedItem(rs.getString("major"));
             if(rs.getString("sex").equals('M'))
                 cmbGender.setSelectedItem("Male");
             else
@@ -71,6 +74,26 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
             EnableDisableButtons();
         } catch (SQLException ex) {
             Logger.getLogger(UpdateDeleteEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void findStanding()
+    {
+        if((Integer.parseInt(txtCredits.getText()) >= 0) && (Integer.parseInt(txtCredits.getText()) < 30))
+        {
+            txtStanding.setText("Freshman");
+        }
+        else if((Integer.parseInt(txtCredits.getText()) >= 30) && (Integer.parseInt(txtCredits.getText()) < 60))
+        {
+            txtStanding.setText("Sophomore");
+        }
+        else if((Integer.parseInt(txtCredits.getText()) >= 60) && (Integer.parseInt(txtCredits.getText()) < 90))
+        {
+            txtStanding.setText("Junior");
+        }
+        else
+        {
+            txtStanding.setText("Senior");
         }
     }
     
@@ -141,8 +164,6 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         IDError.setVisible(false);
         NameError.setText("");
         NameError.setVisible(false);
-        MajorError.setText("");
-        MajorError.setVisible(false);
         AdmitTermError.setText("");
         AdmitTermError.setVisible(false);
         CreditsError.setText("");
@@ -174,16 +195,6 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                 NameError.setText("Invalid. Must be < 50 chars.");
             }
             NameError.setVisible(true);
-            result = false;
-        }
-
-        if (txtMajor.getText().trim().isEmpty() || (txtMajor.getText().trim().length() > 30)) {
-            if (txtMajor.getText().trim().isEmpty()) {
-                MajorError.setText("Invalid. Cannot be empty.");
-            } else if (txtMajor.getText().trim().length() > 30) {
-                MajorError.setText("Invalid. Must be < 30 chars.");
-            }
-            MajorError.setVisible(true);
             result = false;
         }
 
@@ -244,7 +255,6 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtMajor = new javax.swing.JTextField();
         txtCredits = new javax.swing.JTextField();
         txtStanding = new javax.swing.JTextField();
         cmbGender = new javax.swing.JComboBox<>();
@@ -258,13 +268,13 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         UpdateDeleteStudent = new javax.swing.JLabel();
         NameError = new javax.swing.JLabel();
         IDNo = new javax.swing.JLabel();
-        MajorError = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         AdmitTermError = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         GPAError = new javax.swing.JLabel();
         txtGPA = new javax.swing.JTextField();
+        cmbMajor = new javax.swing.JComboBox<>();
 
         txtComm1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -292,13 +302,6 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         jLabel9.setText("GPA:");
 
         txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        txtMajor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtMajor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMajorActionPerformed(evt);
-            }
-        });
 
         txtCredits.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -359,10 +362,6 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         IDNo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         IDNo.setText("ID NO:");
 
-        MajorError.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
-        MajorError.setForeground(new java.awt.Color(255, 0, 0));
-        MajorError.setText("error label");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("NAME:");
 
@@ -381,6 +380,8 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         GPAError.setText("error label");
 
         txtGPA.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        cmbMajor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -414,19 +415,18 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                                 .addComponent(btnNext))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cmbGender, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbMajor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtAdmitTerm, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtMajor, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtStanding, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtCredits, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbGender, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtGPA, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(IDError, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(NameError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(MajorError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(AdmitTermError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(CreditsError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(StandingError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -454,8 +454,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MajorError))
+                    .addComponent(cmbMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -486,15 +485,11 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                     .addComponent(btnDelete)
                     .addComponent(btnNext)
                     .addComponent(btnPrevious))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtMajorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMajorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMajorActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
@@ -504,16 +499,21 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
             //            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             if (isValidData()) {
-                prepStatement = mycon.getCon().prepareStatement("UPDATE emp SET ename = ?, job = ?, mgr = ?, hiredate = ?, sal = ?, comm = ?, deptno = ? WHERE empno = ?");
-                //                prepStatement.setInt(1, Integer.parseInt(txtEmpno.getText()));
-                prepStatement.setString(1, txtName.getText().toUpperCase());
-                prepStatement.setString(2, txtMajor.getText().toUpperCase());
-                prepStatement.setInt(3, Integer.parseInt(cmbGender.getSelectedItem().toString()));
-                prepStatement.setString(4, txtAdmitTerm.getText());
+                findStanding();
+                prepStatement = mycon.getCon().prepareStatement("UPDATE students name=?, sex=?, start_sem=?, major=?, credits=?, standing=?, gpa=? where sid = ?");
+                
+                prepStatement.setString(1, txtName.getText());
+                if(cmbMajor.getSelectedItem()=="Male")
+                    prepStatement.setString(2,"M");
+                else
+                    prepStatement.setString(2,"F");
+                prepStatement.setString(3, txtAdmitTerm.getText());
+                prepStatement.setString(4, cmbMajor.getSelectedItem().toString());
                 prepStatement.setInt(5, Integer.parseInt(txtCredits.getText()));
-                prepStatement.setInt(6, Integer.parseInt(txtStanding.getText()));
-                prepStatement.setInt(7, Integer.parseInt(cmbDeptno.getSelectedItem().toString()));
-                prepStatement.setInt(8, Integer.parseInt(txtID.getText().trim()));
+                prepStatement.setString(6, txtStanding.getText());
+                prepStatement.setDouble(7, Double.parseDouble(txtGPA.getText()));
+                prepStatement.setInt(8, Integer.parseInt(txtID.getText()));
+                
                 int result = prepStatement.executeUpdate();
                 if (result > 0) {
 
@@ -547,7 +547,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
 
         try {
             // make the result set scrolable forward/backward updatable
-            prepStatement = con.prepareStatement("DELETE emp WHERE empno = " + txtID.getText().trim());
+            prepStatement = mycon.getCon().prepareStatement("DELETE student WHERE sid = " + txtID.getText().trim());
             int result = prepStatement.executeUpdate();
             if (result > 0) {
                 javax.swing.JLabel label = new javax.swing.JLabel("Employee No " + txtID.getText().trim() + " deleted successfully.");
@@ -579,7 +579,6 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
     private javax.swing.JLabel GPAError;
     private javax.swing.JLabel IDError;
     private javax.swing.JLabel IDNo;
-    private javax.swing.JLabel MajorError;
     private javax.swing.JLabel NameError;
     private javax.swing.JLabel StandingError;
     private javax.swing.JLabel UpdateDeleteStudent;
@@ -588,6 +587,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbGender;
+    private javax.swing.JComboBox<String> cmbMajor;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -600,7 +600,6 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
     private javax.swing.JTextField txtCredits;
     private javax.swing.JTextField txtGPA;
     private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtMajor;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtStanding;
     // End of variables declaration//GEN-END:variables

@@ -22,8 +22,8 @@ import javax.swing.JOptionPane;
 public class myDBCon {
     
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00084833"; //use AUS ID here
-    String DBPASS = "b00084833"; //user AUD ID here
+    String DBUSER = "b00061555"; //use AUS ID here
+    String DBPASS = "b00061555"; //user AUD ID here
     Statement statement;
     PreparedStatement prepStatement;
     Connection con;
