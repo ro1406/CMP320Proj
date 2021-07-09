@@ -73,7 +73,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
             txtGPA.setText(rs.getString("GPA"));
             EnableDisableButtons();
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateDeleteEmployee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateDeleteStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -107,7 +107,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                 populateFields();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateDeleteEmployee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateDeleteStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -120,7 +120,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                 populateFields();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateDeleteEmployee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateDeleteStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -137,7 +137,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                 btnNext.setEnabled(true);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateDeleteEmployee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateDeleteStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

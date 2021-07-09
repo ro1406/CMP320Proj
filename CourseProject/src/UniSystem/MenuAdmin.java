@@ -44,7 +44,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menu - JDBC GUI");
+        setTitle("Admin Menu");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UniSystem/employees.jpg"))); // NOI18N
 
@@ -176,13 +176,10 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        (new AddEmployee()).setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        (new UpdateDeleteEmployee()).setVisible(true);
-
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
