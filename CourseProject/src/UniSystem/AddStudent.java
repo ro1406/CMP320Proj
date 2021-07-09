@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Lenovo
+ * @author Prem Rajendran
  */
 public class AddStudent extends javax.swing.JFrame {
 
@@ -73,7 +73,7 @@ public class AddStudent extends javax.swing.JFrame {
         }
     }
     
-        public boolean isInteger(String s) {
+    public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
             return true;

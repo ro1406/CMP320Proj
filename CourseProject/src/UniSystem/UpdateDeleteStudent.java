@@ -52,7 +52,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
             rs.first();
             populateFields();
         } catch (SQLException e) {
-            javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Display selected empno.");
+            javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Display selected student ID.");
             label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
             JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -537,7 +537,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(null, "Error updating employee." + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error updating student." + e.getMessage());
 
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -558,7 +558,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
             prepStatement.close();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error adding new student.");
+            JOptionPane.showMessageDialog(null, "Error deleting student.");
 
         }
     }//GEN-LAST:event_btnDeleteActionPerformed

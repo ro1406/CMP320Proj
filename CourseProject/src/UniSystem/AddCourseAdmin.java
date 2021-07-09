@@ -144,6 +144,7 @@ public class AddCourseAdmin extends javax.swing.JFrame {
         txtCredits = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Add New Course");
 
         cmbPreReq.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
