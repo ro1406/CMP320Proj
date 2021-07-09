@@ -173,7 +173,7 @@ public class MenuProf extends javax.swing.JFrame {
     }//GEN-LAST:event_PersonalInfoActionPerformed
 
     private void CourseTaughtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourseTaughtActionPerformed
-        // TODO add your handling code here:
+        (new ViewCoursesProf(currUserId)).setVisible(true);
     }//GEN-LAST:event_CourseTaughtActionPerformed
 
 
