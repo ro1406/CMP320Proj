@@ -517,7 +517,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                 int result = prepStatement.executeUpdate();
                 if (result > 0) {
 
-                    javax.swing.JLabel label = new javax.swing.JLabel("Employee No " + txtID.getText() + " updated successfully.");
+                    javax.swing.JLabel label = new javax.swing.JLabel("Student No " + txtID.getText() + " updated successfully.");
                     label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
                     JOptionPane.showMessageDialog(null, label, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 
@@ -550,16 +550,15 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
             prepStatement = mycon.getCon().prepareStatement("DELETE student WHERE sid = " + txtID.getText().trim());
             int result = prepStatement.executeUpdate();
             if (result > 0) {
-                javax.swing.JLabel label = new javax.swing.JLabel("Employee No " + txtID.getText().trim() + " deleted successfully.");
+                javax.swing.JLabel label = new javax.swing.JLabel("Student No " + txtID.getText().trim() + " deleted successfully.");
                 label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
                 JOptionPane.showMessageDialog(null, label, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
                 getNewData();
             }
-
             prepStatement.close();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error adding new employee.");
+            JOptionPane.showMessageDialog(null, "Error adding new student.");
 
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
