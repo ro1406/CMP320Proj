@@ -150,7 +150,7 @@ public class MenuProf extends javax.swing.JFrame {
 
     private void ViewStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewStatsActionPerformed
         // TODO add your handling code here:
-        (new AddEmployee()).setVisible(true);
+        (new CourseStats(currUserId)).setVisible(true);
     }//GEN-LAST:event_ViewStatsActionPerformed
 
     private void AddCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourseActionPerformed

@@ -26,8 +26,8 @@ public class ProfInfo extends javax.swing.JFrame {
      * Creates new form AddEmployee
      */
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00061555";
-    String DBPASS = "b00061555";
+    String DBUSER = "b00085023";
+    String DBPASS = "b00085023";
 
     Connection con;
     Statement statement;
@@ -42,14 +42,15 @@ public class ProfInfo extends javax.swing.JFrame {
             con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             // Get all data:
-            rs = statement.executeQuery("SELECT * FROM professors WHERE ID = "+id);
-            clearInputBoxes();
-            
+            rs = statement.executeQuery("SELECT * FROM professors WHERE PID = "+id);
+            rs.beforeFirst();
+            rs.next();
+                        
             txtName.setText(rs.getString("Name"));
-            txtID.setText(rs.getString("ID"));
-            txtDept.setText(rs.getString("Department"));
+            txtID.setText(rs.getString("PID"));
+            txtDept.setText(rs.getString("College"));
             txtAge.setText(rs.getString("Age"));
-    
+            
             rs.close();
             statement.close();
         } catch (ClassNotFoundException | SQLException e) {
@@ -177,13 +178,6 @@ public class ProfInfo extends javax.swing.JFrame {
     private void txtDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDeptActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDeptActionPerformed
-
-    void clearInputBoxes() {
-        txtName.setText("");
-        txtID.setText("");
-        txtAge.setText("");
-        txtDept.setText("");
-    }
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();

@@ -26,15 +26,15 @@ public class CourseStats extends javax.swing.JFrame {
      * Creates new form AddEmployee
      */
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00061555";
-    String DBPASS = "b00061555";
+    String DBUSER = "b00085023";
+    String DBPASS = "b00085023";
 
     Connection con;
     Statement statement;
     PreparedStatement prepStatement;
     ResultSet rs;
 
-    public CourseStats() {
+    public CourseStats(int currUserId) {
         initComponents();
         // center form in screen 
         this.setLocationRelativeTo(null);
@@ -48,14 +48,16 @@ public class CourseStats extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = statement.executeQuery("SELECT s.CRN,s.course_code FROM prof_course p,Sections s WHERE p.course_code=s.course_code");
-
+            rs = statement.executeQuery("SELECT distinct s.CRN,s.course_code FROM professors_Courses p, courses_sections s " +
+                                        "WHERE p.course_code=s.course_code AND p.pid = "+currUserId+" AND " +
+                                        "EXISTS (SELECT CRN FROM students_grades WHERE CRN=s.crn)");
+            
             while (rs.next()) {
                 cmbCRN.addItem(rs.getString("CRN")+" - "+rs.getString("Course_code"));
             }
             
-            rs.close();
-            statement.close();
+            //rs.close();
+            //statement.close();
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
@@ -240,10 +242,17 @@ public class CourseStats extends javax.swing.JFrame {
 
     private void ConfirmCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmCourseActionPerformed
         String crn = cmbCRN.getSelectedItem().toString().substring(0,5);
+        System.out.println(crn);
         //FIND ALL STATS AND POPULATE LABELS:
         try{
-            rs = statement.executeQuery("SELECT MIN(Grade) as mini, MAX(Grade) as maxx, AVG(Grade) as avg, STDEV(Grade) as std FROM "
-                    + "Prof_course p, sections s, stud_sec ss WHERE p.course_code=s.course_code AND s.CRN=ss.CRN");
+            System.out.println("SELECT MIN(Grade) as mini, MAX(Grade) as maxx, AVG(Grade) as avg, STDDEV(Grade) as std " +
+                                        "FROM students_grades WHERE CRN = "+crn);
+            
+            rs = statement.executeQuery("SELECT MIN(Grade) as mini, MAX(Grade) as maxx, AVG(Grade) as avg, STDDEV(Grade) as std " +
+                                        "FROM students_grades WHERE CRN = "+crn);
+            
+            rs.beforeFirst();
+            rs.next();
             MaxLbl.setText(rs.getString("maxx"));
             MinLbl.setText(rs.getString("mini"));
             AvgLbl.setText(rs.getString("avg"));

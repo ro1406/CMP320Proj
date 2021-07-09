@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 public class LoginForm extends javax.swing.JFrame {
 
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00061555";
-    String DBPASS = "b00061555";
+    String DBUSER = "b00085023";
+    String DBPASS = "b00085023";
 
     boolean validLogin = false;
 
@@ -145,10 +145,10 @@ public class LoginForm extends javax.swing.JFrame {
 
         try {
             rs=statement.executeQuery(
-                    "SELECT username, password, type FROM USERS "  
+                    "SELECT username, password, type FROM users "  
                     + "WHERE username = '" + txtUsername.getText().trim()
                     + "' AND password = '" + txtPassword.getText().trim() + "'"
-            );
+            );      
             rs.beforeFirst();
             if (rs.next()) {
                 //Find out who logged in and open the respective menus:
@@ -156,18 +156,12 @@ public class LoginForm extends javax.swing.JFrame {
                 int type=rs.getInt("Type");
                 if(type==0){//0 is Admin
                     (new MenuAdmin()).setVisible(true);
-                }
-                
-                ////////////////////////////////// ASSUMPTION BELOW THAT USERID STORED IN STUDENT AND PROFESSOR TABLE RESPECTIVELY
-                ////////////////////////////////// IF WE CONTINUE WIT THIS, DISPLAY UID IN PERSONALINFO TOO.
-                
+                }                
                 else if(type==1){//1 is Student
-                    rs=statement.executeQuery("SELECT id FROM STUDENT WHERE username = '"+txtUsername.getText().trim()+"'");
-                    (new MenuStud(rs.getInt("id"))).setVisible(true);
+                    (new MenuStud(Integer.parseInt(rs.getString("username").substring(1,6)))).setVisible(true);
                 }
                 else{//2 is Professor
-                    rs=statement.executeQuery("SELECT id FROM PROFESSOR WHERE username = '"+txtUsername.getText().trim()+"'");
-                    (new MenuProf(rs.getInt("id"))).setVisible(true);
+                    (new MenuProf(Integer.parseInt(rs.getString("username").substring(1,3)))).setVisible(true);
                 }
                 this.dispose();
             }
