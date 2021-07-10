@@ -104,7 +104,6 @@ public class AddStudent extends javax.swing.JFrame {
         StandingError.setVisible(false);
         GPAError.setText("");
         GPAError.setVisible(false);
-
     }
     
     boolean isValidData() {
@@ -420,7 +419,7 @@ public class AddStudent extends javax.swing.JFrame {
                 prepStatement = mycon.getCon().prepareStatement("INSERT INTO students (sid, name, sex, start_sem, major, credits, standing, gpa) VALUES (?,?,?,?,?,?,?,?)");
                 prepStatement.setInt(1, Integer.parseInt(txtID.getText()));
                 prepStatement.setString(2, txtName.getText());
-                if(cmbMajor.getSelectedItem()=="Male")
+                if(cmbGender.getSelectedItem()=="Male")
                     prepStatement.setString(3,"M");
                 else
                     prepStatement.setString(3,"F");
