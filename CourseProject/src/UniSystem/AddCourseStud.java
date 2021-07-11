@@ -47,14 +47,14 @@ public class AddCourseStud extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = statement.executeQuery("SELECT * FROM course");
+            rs = statement.executeQuery("select * FROM courses");
             // populate Course combo box
             while (rs.next()) {
-                cmbCourse.addItem(rs.getString("Code"));
+                cmbCourse.addItem(rs.getString("course_code"));
             }
             
-            rs.close();
-            statement.close();
+            //rs.close();
+            //statement.close();
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
@@ -69,26 +69,30 @@ public class AddCourseStud extends javax.swing.JFrame {
         rs.next();
         int totalCredits = rs.getInt("sumc");
 
-        rs = statement.executeQuery("select sg.grade, c.credits" +
+        rs = statement.executeQuery("select sg.grade as grade, c.credits as credits" +
                                     " from students_grades sg, courses c, courses_sections cs" +
                                     " where c.course_code = cs.course_code and cs.crn = sg.crn and sg.sid = " + currUser);
         double totalGrade = 0.0;
         rs.beforeFirst();
         while(rs.next()){
-            totalGrade += rs.getDouble("grade") * (rs.getInt("credits")/totalCredits);
+            totalGrade += Double.parseDouble(rs.getString("grade")) * (rs.getInt("credits")/totalCredits);
         }
-        totalGrade = (totalGrade/100)*4;
-
+        
         String currentStanding;
         if (totalCredits > 12) currentStanding = "Senior";
-        else if (totalCredits > 12) currentStanding = "Junior";
-        else if (totalCredits > 12) currentStanding = "Sophomore";
+        else if (totalCredits > 8) currentStanding = "Junior";
+        else if (totalCredits > 4) currentStanding = "Sophomore";
         else currentStanding = "Freshman";
-
+        
+        System.out.println("update students set gpa = " + totalGrade +
+                                    ", credits = " + totalCredits +
+                                    ", standing = '" + currentStanding +
+                                    "' where sid = " + currUser);
+        
         rs = statement.executeQuery("update students set gpa = " + totalGrade +
                                     ", credits = " + totalCredits +
-                                    ", standing = " + currentStanding +
-                                    " where sid = " + currUser);
+                                    ", standing = '" + currentStanding +
+                                    "' where sid = " + currUser);
     }
 
 
@@ -248,6 +252,7 @@ public class AddCourseStud extends javax.swing.JFrame {
             
             
             prepStatement = con.prepareStatement("INSERT INTO students_grades (SID,CRN,grade) VALUES(?,?,?) ");
+            
             prepStatement.setInt(1, currUser);
             prepStatement.setString(2, cmbCRN.getSelectedItem().toString());
             prepStatement.setDouble(3, Double.parseDouble(cmbGrades.getSelectedItem().toString()));
@@ -261,17 +266,12 @@ public class AddCourseStud extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Error adding course.");
             }
-
+            calculateTotalGradeCredit();
             rs.close();
             statement.close();
             prepStatement.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error adding course.");
-        }
-        try {
-            calculateTotalGradeCredit();
-        } catch (SQLException ex) {
-            Logger.getLogger(AddCourseStud.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error adding course." + e);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -280,7 +280,7 @@ public class AddCourseStud extends javax.swing.JFrame {
         cmbCRN.setVisible(true);
         cmbGrades.setVisible(true);
         try{
-            rs = statement.executeQuery("SELECT CRN FROM Sections WHERE Course_code = '"+cmbCourse.getSelectedItem().toString()+"'");
+            rs = statement.executeQuery("SELECT CRN FROM courses_sections WHERE course_code = '" + cmbCourse.getSelectedItem().toString() +"'");
             rs.beforeFirst();
             while(rs.next()){
                 cmbCRN.addItem(rs.getString("CRN"));
@@ -291,7 +291,7 @@ public class AddCourseStud extends javax.swing.JFrame {
             }
             
         }
-        catch (SQLException e) {JOptionPane.showMessageDialog(null, "Error adding course.");}
+        catch (SQLException e) {JOptionPane.showMessageDialog(null, "Error adding course." + e);}
     }//GEN-LAST:event_ConfirmCourseActionPerformed
 
 

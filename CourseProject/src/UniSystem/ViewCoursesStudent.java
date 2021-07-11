@@ -143,7 +143,7 @@ public class ViewCoursesStudent extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         txtCredits = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update/Delete Course");
 
         txtCode.setEditable(false);

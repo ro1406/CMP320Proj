@@ -45,12 +45,15 @@ public class StudentInfo extends javax.swing.JFrame {
             rs = statement.executeQuery("SELECT * FROM students WHERE SID = "+id);
             clearInputBoxes();
             
-            txtName.setText(rs.getString("Name"));
-            txtID.setText(rs.getString("ID"));
-            txtMajor.setText(rs.getString("Major"));
-            txtGender.setText(rs.getString("Gender"));
-            txtStartSem.setText(rs.getString("Start Semester"));
-            txtCredits.setText(rs.getString("Credits"));
+            rs.beforeFirst();
+            rs.next();
+            
+            txtName.setText(rs.getString("name"));
+            txtID.setText(rs.getString("sid"));
+            txtMajor.setText(rs.getString("major"));
+            txtGender.setText(rs.getString("sex"));
+            txtStartSem.setText(rs.getString("start_sem"));
+            txtCredits.setText(rs.getString("credits"));
             txtStanding.setText(rs.getString("Standing"));
             txtGrade.setText(rs.getString("GPA"));
             

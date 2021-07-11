@@ -33,14 +33,16 @@ public class DropCourseStud extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         currUser=id;
         try {
-            rs = mycon.getstate().executeQuery("SELECT * FROM course");
+            rs = mycon.getstate().executeQuery("select distinct c.course_code" +
+                                                " from courses c, courses_sections cs, students_grades sg" +
+                                                " where c.course_code = cs.course_code and cs.crn = sg.crn and sg.sid = " + id);
             // populate Course combo box
             while (rs.next()) {
-                cmbCourse.addItem(rs.getString("Code"));
+                cmbCourse.addItem(rs.getString("course_code"));
             }
             
-            rs.close();
-            statement.close();
+            //rs.close();
+            //statement.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -55,8 +57,6 @@ public class DropCourseStud extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel7 = new javax.swing.JLabel();
-        cmbGrades = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         cmbCourse = new javax.swing.JComboBox<>();
         btnDrop = new javax.swing.JButton();
@@ -65,13 +65,8 @@ public class DropCourseStud extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ConfirmCourse = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Drop Course");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Grade:");
-
-        cmbGrades.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Course:");
@@ -108,29 +103,25 @@ public class DropCourseStud extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 531, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(91, 91, 91)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(38, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(200, 200, 200)
+                    .addComponent(btnDrop))
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(28, 28, 28))
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(ConfirmCourse))
-                                .addComponent(cmbCRN, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmbGrades, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(190, 190, 190)
-                            .addComponent(btnDrop)))
+                            .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(ConfirmCourse))
+                        .addComponent(cmbCRN, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -149,13 +140,9 @@ public class DropCourseStud extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
                         .addComponent(cmbCRN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(cmbGrades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(26, 26, 26)
+                    .addGap(58, 58, 58)
                     .addComponent(btnDrop)
-                    .addContainerGap(30, Short.MAX_VALUE)))
+                    .addContainerGap(34, Short.MAX_VALUE)))
         );
 
         pack();
@@ -181,8 +168,8 @@ public class DropCourseStud extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error dropping course.");
             }
 
-            rs.close();
-            statement.close();
+            //rs.close();
+            //statement.close();
             prepStatement.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error dropping course.");
@@ -192,16 +179,15 @@ public class DropCourseStud extends javax.swing.JFrame {
     private void ConfirmCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmCourseActionPerformed
         jLabel6.setVisible(true);
         cmbCRN.setVisible(true);
-        cmbGrades.setVisible(true);
         try{
-            rs = statement.executeQuery("SELECT CRN FROM Sections WHERE Course_code = '"+cmbCourse.getSelectedItem().toString()+"'");
+            rs = mycon.getstate().executeQuery("SELECT distinct sg.crn" +
+                                                " FROM courses_sections cs, students_grades sg" +
+                                                " WHERE cs.crn = sg.crn and cs.course_code = '" + cmbCourse.getSelectedItem().toString() +
+                                                "' and sg.sid = " + currUser);
             rs.beforeFirst();
+            cmbCRN.removeAllItems();
             while(rs.next()){
                 cmbCRN.addItem(rs.getString("CRN"));
-            }
-            String arr[]={"4","3.7","3.3","3.0","2.7","2.3","2.0","1.7","1.0","0.0"};
-            for(String x:arr){
-                cmbGrades.addItem(x);
             }
 
         }
@@ -213,10 +199,8 @@ public class DropCourseStud extends javax.swing.JFrame {
     private javax.swing.JButton btnDrop;
     private javax.swing.JComboBox<String> cmbCRN;
     private javax.swing.JComboBox<String> cmbCourse;
-    private javax.swing.JComboBox<String> cmbGrades;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

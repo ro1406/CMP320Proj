@@ -419,8 +419,8 @@ public class AddStudent extends javax.swing.JFrame {
                 findStanding();
                 prepStatement = mycon.getCon().prepareStatement("INSERT INTO students (sid, name, sex, start_sem, major, credits, standing, gpa) VALUES (?,?,?,?,?,?,?,?)");
                 prepStatement2 = mycon.getCon().prepareStatement("INSERT INTO users (username,password,name,type) VALUES (?,?,?,?)");
-                prepStatement2.setString(1, "s"+sid);
-                prepStatement2.setString(2, "s"+sid);
+                prepStatement2.setString(1, "s"+ txtID.getText());
+                prepStatement2.setString(2, "s"+ txtID.getText());
                 prepStatement2.setString(3, txtName.getText());
                 prepStatement2.setInt(4, 1);
                 prepStatement.setInt(1, Integer.parseInt(txtID.getText()));
