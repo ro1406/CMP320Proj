@@ -36,6 +36,7 @@ public class AddCourseAdmin extends javax.swing.JFrame {
         try
         {
             rs = mycon.getstate().executeQuery("select course_name from courses order by course_name");
+            cmbPreReq.addItem("no prerequisites");
             while(rs.next())
             {
                 cmbPreReq.addItem(rs.getString("course_name"));
@@ -143,7 +144,7 @@ public class AddCourseAdmin extends javax.swing.JFrame {
         Code = new javax.swing.JLabel();
         txtCredits = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add New Course");
 
         cmbPreReq.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -274,12 +275,17 @@ public class AddCourseAdmin extends javax.swing.JFrame {
                 prepStatement.setString(2, txtName.getText());
                 prepStatement.setInt(3, Integer.parseInt(txtCredits.getText()));
                 
-                prepStatement2 = mycon.getCon().prepareStatement("INSERT INTO courses_prerequisites (course_code, prereq_code) values (?,?)");
-                prepStatement2.setString(1, txtCode.getText());
-                prepStatement2.setString(2, cmbPreReq.getSelectedItem().toString());
+                int result2 = 1;
+                
+                if (!cmbPreReq.getSelectedItem().toString().equals("no prerequisites")){
+                    prepStatement2 = mycon.getCon().prepareStatement("INSERT INTO courses_prerequisites (course_code, prereq_code) values (?,?)");
+                    prepStatement2.setString(1, txtCode.getText());
+                    prepStatement2.setString(2, cmbPreReq.getSelectedItem().toString());
+                    result2 = prepStatement2.executeUpdate();
+                }
                 
                 int result1 = prepStatement.executeUpdate();
-                int result2 = prepStatement2.executeUpdate();
+
                 if (result1 > 0 && result2 > 0) {
 
                     javax.swing.JLabel label = new javax.swing.JLabel("New course added successfully.");
@@ -290,7 +296,9 @@ public class AddCourseAdmin extends javax.swing.JFrame {
                     // check validation errors
                 }
                 prepStatement.close();
-                prepStatement2.close();
+                
+                if (!cmbPreReq.getSelectedItem().toString().equals("no prerequisites"))
+                    prepStatement2.close();
             } else {
                 javax.swing.JLabel label = new javax.swing.JLabel("Please fix validation errors...");
                 label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
@@ -298,7 +306,7 @@ public class AddCourseAdmin extends javax.swing.JFrame {
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error adding new student.");
+            JOptionPane.showMessageDialog(null, "Error adding new course.");
         }
     }//GEN-LAST:event_btnAddNewCourseActionPerformed
 

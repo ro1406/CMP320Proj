@@ -68,14 +68,17 @@ public class AddCourseStud extends javax.swing.JFrame {
         rs.beforeFirst();
         rs.next();
         int totalCredits = rs.getInt("sumc");
-
+        
         rs = statement.executeQuery("select sg.grade as grade, c.credits as credits" +
                                     " from students_grades sg, courses c, courses_sections cs" +
                                     " where c.course_code = cs.course_code and cs.crn = sg.crn and sg.sid = " + currUser);
+        
         double totalGrade = 0.0;
         rs.beforeFirst();
         while(rs.next()){
-            totalGrade += Double.parseDouble(rs.getString("grade")) * (rs.getInt("credits")/totalCredits);
+            System.out.println(rs.getString("grade") + " * " + rs.getInt("credits") + " / " + totalCredits);
+            totalGrade += Double.parseDouble(rs.getString("grade")) * (Double.parseDouble(rs.getString("credits"))/totalCredits);
+            System.out.println(totalGrade);
         }
         
         String currentStanding;
@@ -83,12 +86,7 @@ public class AddCourseStud extends javax.swing.JFrame {
         else if (totalCredits > 8) currentStanding = "Junior";
         else if (totalCredits > 4) currentStanding = "Sophomore";
         else currentStanding = "Freshman";
-        
-        System.out.println("update students set gpa = " + totalGrade +
-                                    ", credits = " + totalCredits +
-                                    ", standing = '" + currentStanding +
-                                    "' where sid = " + currUser);
-        
+   
         rs = statement.executeQuery("update students set gpa = " + totalGrade +
                                     ", credits = " + totalCredits +
                                     ", standing = '" + currentStanding +
