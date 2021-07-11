@@ -189,7 +189,6 @@ public class UpdateDeleteProf extends javax.swing.JFrame {
         cmbGender = new javax.swing.JComboBox<>();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        txtAge = new javax.swing.JFormattedTextField();
         txtID = new javax.swing.JTextField();
         btnNext = new javax.swing.JButton();
         btnPrevious = new javax.swing.JButton();
@@ -204,6 +203,7 @@ public class UpdateDeleteProf extends javax.swing.JFrame {
         Age = new javax.swing.JLabel();
         cmbCollege = new javax.swing.JComboBox<>();
         txtName = new javax.swing.JTextField();
+        txtAge = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update/Delete Professor");
@@ -225,9 +225,6 @@ public class UpdateDeleteProf extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-
-        txtAge.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MMM-yyyy"))));
-        txtAge.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         txtID.setEditable(false);
         txtID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -282,6 +279,8 @@ public class UpdateDeleteProf extends javax.swing.JFrame {
 
         txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        txtAge.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -313,8 +312,8 @@ public class UpdateDeleteProf extends javax.swing.JFrame {
                                     .addComponent(cmbGender, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cmbCollege, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAge, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(IDError, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -348,8 +347,8 @@ public class UpdateDeleteProf extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Age)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AgeError))
+                    .addComponent(AgeError)
+                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
@@ -455,7 +454,7 @@ public class UpdateDeleteProf extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbCollege;
     private javax.swing.JComboBox<String> cmbGender;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JFormattedTextField txtAge;
+    private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

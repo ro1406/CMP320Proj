@@ -260,7 +260,6 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         cmbGender = new javax.swing.JComboBox<>();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        txtAdmitTerm = new javax.swing.JFormattedTextField();
         txtID = new javax.swing.JTextField();
         btnNext = new javax.swing.JButton();
         btnPrevious = new javax.swing.JButton();
@@ -275,6 +274,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
         GPAError = new javax.swing.JLabel();
         txtGPA = new javax.swing.JTextField();
         cmbMajor = new javax.swing.JComboBox<>();
+        txtAdmitTerm = new javax.swing.JTextField();
 
         txtComm1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -325,9 +325,6 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-
-        txtAdmitTerm.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MMM-yyyy"))));
-        txtAdmitTerm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         txtID.setEditable(false);
         txtID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -383,6 +380,8 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
 
         cmbMajor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        txtAdmitTerm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -418,11 +417,11 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                                     .addComponent(cmbGender, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cmbMajor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAdmitTerm, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtStanding, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtCredits, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtGPA, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                    .addComponent(txtGPA, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(txtAdmitTerm))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(IDError, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -462,8 +461,8 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtAdmitTerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AdmitTermError))
+                    .addComponent(AdmitTermError)
+                    .addComponent(txtAdmitTerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -594,7 +593,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JFormattedTextField txtAdmitTerm;
+    private javax.swing.JTextField txtAdmitTerm;
     private javax.swing.JTextField txtComm1;
     private javax.swing.JTextField txtCredits;
     private javax.swing.JTextField txtGPA;

@@ -148,7 +148,6 @@ public class AddSection extends javax.swing.JFrame {
 
         btnAddNewSection = new javax.swing.JButton();
         Location = new javax.swing.JLabel();
-        txtSem = new javax.swing.JFormattedTextField();
         Time = new javax.swing.JLabel();
         CRNError = new javax.swing.JLabel();
         txtCRN = new javax.swing.JTextField();
@@ -164,8 +163,9 @@ public class AddSection extends javax.swing.JFrame {
         cmbCode = new javax.swing.JComboBox<>();
         ProfID = new javax.swing.JLabel();
         Semester = new javax.swing.JLabel();
+        txtSem = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add New Section");
 
         btnAddNewSection.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -178,9 +178,6 @@ public class AddSection extends javax.swing.JFrame {
 
         Location.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Location.setText("LOCATION:");
-
-        txtSem.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MMM-yyyy"))));
-        txtSem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         Time.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Time.setText("TIME:");
@@ -216,7 +213,6 @@ public class AddSection extends javax.swing.JFrame {
         TimeError.setForeground(new java.awt.Color(255, 0, 0));
         TimeError.setText("error label");
 
-        txtTime.setEditable(false);
         txtTime.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +232,13 @@ public class AddSection extends javax.swing.JFrame {
 
         Semester.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Semester.setText("SEMESTER:");
+
+        txtSem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtSem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,8 +269,8 @@ public class AddSection extends javax.swing.JFrame {
                                     .addComponent(cmbProfID, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtTime, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtLoc, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSem, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbCode, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cmbCode, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtSem, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(SemError, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
@@ -364,6 +367,10 @@ public class AddSection extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimeActionPerformed
 
+    private void txtSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CRNError;
     private javax.swing.JLabel CRNNo;
@@ -381,7 +388,7 @@ public class AddSection extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbProfID;
     private javax.swing.JTextField txtCRN;
     private javax.swing.JTextField txtLoc;
-    private javax.swing.JFormattedTextField txtSem;
+    private javax.swing.JTextField txtSem;
     private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
 }

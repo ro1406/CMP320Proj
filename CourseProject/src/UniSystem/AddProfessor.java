@@ -122,7 +122,6 @@ public class AddProfessor extends javax.swing.JFrame {
     private void initComponents() {
 
         btnAddNewProf = new javax.swing.JButton();
-        txtAge = new javax.swing.JFormattedTextField();
         IDError = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         NameError = new javax.swing.JLabel();
@@ -136,8 +135,9 @@ public class AddProfessor extends javax.swing.JFrame {
         cmbMajor = new javax.swing.JComboBox<>();
         Gender = new javax.swing.JLabel();
         Age = new javax.swing.JLabel();
+        txtAge = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add New Professor");
 
         btnAddNewProf.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -147,9 +147,6 @@ public class AddProfessor extends javax.swing.JFrame {
                 btnAddNewProfActionPerformed(evt);
             }
         });
-
-        txtAge.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MMM-yyyy"))));
-        txtAge.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         IDError.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         IDError.setForeground(new java.awt.Color(255, 0, 0));
@@ -189,6 +186,8 @@ public class AddProfessor extends javax.swing.JFrame {
         Age.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Age.setText("AGE:");
 
+        txtAge.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,8 +215,8 @@ public class AddProfessor extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(cmbGender, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtAge, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbMajor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cmbMajor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtAge, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(NameError, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
@@ -252,13 +251,15 @@ public class AddProfessor extends javax.swing.JFrame {
                     .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AgeError, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(AgeError)
+                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(Age)
-                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 33, 33)
+                        .addGap(3, 3, 3)))
+                .addGap(30, 30, 30)
                 .addComponent(btnAddNewProf)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -356,7 +357,7 @@ public class AddProfessor extends javax.swing.JFrame {
     private javax.swing.JButton btnAddNewProf;
     private javax.swing.JComboBox<String> cmbGender;
     private javax.swing.JComboBox<String> cmbMajor;
-    private javax.swing.JFormattedTextField txtAge;
+    private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

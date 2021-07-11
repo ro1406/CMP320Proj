@@ -56,15 +56,15 @@ public class AddStudent extends javax.swing.JFrame {
     
     public void findStanding()
     {
-        if((Integer.parseInt(txtCredits.getText()) >= 0) && (Integer.parseInt(txtCredits.getText()) < 30))
+        if((Integer.parseInt(txtCredits.getText()) >= 0) && (Integer.parseInt(txtCredits.getText()) < 4))
         {
             txtStanding.setText("Freshman");
         }
-        else if((Integer.parseInt(txtCredits.getText()) >= 30) && (Integer.parseInt(txtCredits.getText()) < 60))
+        else if((Integer.parseInt(txtCredits.getText()) >= 4) && (Integer.parseInt(txtCredits.getText()) < 8))
         {
             txtStanding.setText("Sophomore");
         }
-        else if((Integer.parseInt(txtCredits.getText()) >= 60) && (Integer.parseInt(txtCredits.getText()) < 90))
+        else if((Integer.parseInt(txtCredits.getText()) >= 8) && (Integer.parseInt(txtCredits.getText()) < 12))
         {
             txtStanding.setText("Junior");
         }
@@ -188,7 +188,6 @@ public class AddStudent extends javax.swing.JFrame {
         AdmitTerm = new javax.swing.JLabel();
         btnAddNewEmp = new javax.swing.JButton();
         Credits = new javax.swing.JLabel();
-        txtAdmitTerm = new javax.swing.JFormattedTextField();
         Standing = new javax.swing.JLabel();
         IDError = new javax.swing.JLabel();
         GPA = new javax.swing.JLabel();
@@ -205,6 +204,7 @@ public class AddStudent extends javax.swing.JFrame {
         GPAError = new javax.swing.JLabel();
         FindStanding = new javax.swing.JButton();
         cmbGender = new javax.swing.JComboBox<>();
+        txtAdmitTerm = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add New Student");
@@ -241,9 +241,6 @@ public class AddStudent extends javax.swing.JFrame {
 
         Credits.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Credits.setText("CREDITS:");
-
-        txtAdmitTerm.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MMM-yyyy"))));
-        txtAdmitTerm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         Standing.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Standing.setText("STANDING:");
@@ -304,6 +301,13 @@ public class AddStudent extends javax.swing.JFrame {
 
         cmbGender.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        txtAdmitTerm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtAdmitTerm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAdmitTermActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -338,9 +342,9 @@ public class AddStudent extends javax.swing.JFrame {
                                             .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                             .addComponent(txtStanding, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                             .addComponent(txtCredits, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtAdmitTerm, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtGPA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                            .addComponent(cmbMajor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(cmbMajor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtAdmitTerm))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(NameError, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
@@ -380,10 +384,10 @@ public class AddStudent extends javax.swing.JFrame {
                     .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AdmitTermError, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(AdmitTerm)
-                        .addComponent(txtAdmitTerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(AdmitTermError, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(AdmitTerm))
+                    .addComponent(txtAdmitTerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Credits)
@@ -470,6 +474,10 @@ public class AddStudent extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStandingActionPerformed
 
+    private void txtAdmitTermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdmitTermActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAdmitTermActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AdmitTerm;
     private javax.swing.JLabel AdmitTermError;
@@ -490,7 +498,7 @@ public class AddStudent extends javax.swing.JFrame {
     private javax.swing.JButton btnAddNewEmp;
     private javax.swing.JComboBox<String> cmbGender;
     private javax.swing.JComboBox<String> cmbMajor;
-    private javax.swing.JFormattedTextField txtAdmitTerm;
+    private javax.swing.JTextField txtAdmitTerm;
     private javax.swing.JTextField txtCredits;
     private javax.swing.JTextField txtGPA;
     private javax.swing.JTextField txtID;

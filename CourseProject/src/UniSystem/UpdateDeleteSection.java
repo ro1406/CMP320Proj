@@ -208,7 +208,6 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
         cmbProfID = new javax.swing.JComboBox<>();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        txtSem = new javax.swing.JFormattedTextField();
         txtCRN = new javax.swing.JTextField();
         btnNext = new javax.swing.JButton();
         btnPrevious = new javax.swing.JButton();
@@ -227,6 +226,7 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
         txtTime = new javax.swing.JTextField();
         txtCode = new javax.swing.JTextField();
         CodeError = new javax.swing.JLabel();
+        txtSem = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -247,9 +247,6 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-
-        txtSem.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MMM-yyyy"))));
-        txtSem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         txtCRN.setEditable(false);
         txtCRN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -323,6 +320,8 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
         CodeError.setForeground(new java.awt.Color(255, 0, 0));
         CodeError.setText("error label");
 
+        txtSem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -356,9 +355,9 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
                                     .addComponent(txtCode, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbProfID, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtCRN, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSem, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTime, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtLoc, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(txtLoc, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSem))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(CRNError, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -393,8 +392,8 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Sem)
-                    .addComponent(txtSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SemError))
+                    .addComponent(SemError)
+                    .addComponent(txtSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Loc)
@@ -516,7 +515,7 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
     private javax.swing.JTextField txtCRN;
     private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtLoc;
-    private javax.swing.JFormattedTextField txtSem;
+    private javax.swing.JTextField txtSem;
     private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
 }
