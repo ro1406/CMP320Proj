@@ -214,7 +214,7 @@ public class AddCourseStud extends javax.swing.JFrame {
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             
             
-            prepStatement = con.prepareStatement("INSERT INTO student_grade (SID,CRN,grade) VALUES(?,?,?) ");
+            prepStatement = con.prepareStatement("INSERT INTO students_grades (SID,CRN,grade) VALUES(?,?,?) ");
             prepStatement.setInt(1, currUser);
             prepStatement.setString(2, cmbCRN.getSelectedItem().toString());
             prepStatement.setDouble(3, Double.parseDouble(cmbGrades.getSelectedItem().toString()));
