@@ -59,7 +59,7 @@ public class AddCourseStud extends javax.swing.JFrame {
 
     }
 
-    private void calculateTotalGradeCredit(){
+    private void calculateTotalGradeCredit() throws SQLException{
         rs = statement.executeQuery("select sum(c.credits) sumc" +
                                     " from students_grades sg, courses c, courses_sections cs" +
                                     " where c.course_code = cs.course_code and cs.crn = sg.crn and sg.sid = " + currUser);
@@ -78,9 +78,9 @@ public class AddCourseStud extends javax.swing.JFrame {
         totalGrade = (totalGrade/100)*4;
 
         String currentStanding;
-        if (credits > 12) currentStanding = "Senior";
-        else if (credits > 12) currentStanding = "Junior";
-        else if (credits > 12) currentStanding = "Sophomore";
+        if (totalCredits > 12) currentStanding = "Senior";
+        else if (totalCredits > 12) currentStanding = "Junior";
+        else if (totalCredits > 12) currentStanding = "Sophomore";
         else currentStanding = "Freshman";
 
         rs = statement.executeQuery("update students set gpa = " + totalGrade +
