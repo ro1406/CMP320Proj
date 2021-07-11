@@ -176,3 +176,8 @@ select c.course_code, c.course_name, sg.grade
 from courses c, courses_sections cs, students_grades sg
 where c.course_code = cs.course_code and cs.crn = sg.crn and sg.sid = 80000
 order by course_name;
+
+update students_grades set grade = 3.7 where sid=80000 and crn=11011;
+update students_grades set grade = 3.0 where sid=80000 and crn=11012;
+update students_grades set grade = 2.3 where sid=79000 and crn=11011;
+update students_grades set grade = 2.0 where sid=79000 and crn=11012;
