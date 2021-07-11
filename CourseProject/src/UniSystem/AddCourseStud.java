@@ -253,7 +253,7 @@ public class AddCourseStud extends javax.swing.JFrame {
             }
             
         }
-        catch (SQLException e) {JOptionPane.showMessageDialog(null, "Error adding new employee.");}
+        catch (SQLException e) {JOptionPane.showMessageDialog(null, "Error adding course.");}
     }//GEN-LAST:event_ConfirmCourseActionPerformed
 
 
