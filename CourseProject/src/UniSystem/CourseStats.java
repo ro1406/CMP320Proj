@@ -18,16 +18,14 @@ import javax.swing.JOptionPane;
  */
 /**
  *
- * @author wissam
+ * @author Rohan
  */
 public class CourseStats extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddEmployee
-     */
+   
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00085023";
-    String DBPASS = "b00085023";
+    String DBUSER = "b00061555";
+    String DBPASS = "b00061555";
 
     Connection con;
     Statement statement;
@@ -51,7 +49,10 @@ public class CourseStats extends javax.swing.JFrame {
             rs = statement.executeQuery("SELECT distinct s.CRN,s.course_code FROM professors_Courses p, courses_sections s " +
                                         "WHERE p.course_code=s.course_code AND p.pid = "+currUserId+" AND " +
                                         "EXISTS (SELECT CRN FROM students_grades WHERE CRN=s.crn)");
-            
+            System.out.println("SELECT distinct s.CRN,s.course_code FROM professors_Courses p, courses_sections s " +
+                                        "WHERE p.course_code=s.course_code AND p.pid = "+currUserId+" AND " +
+                                        "EXISTS (SELECT CRN FROM students_grades WHERE CRN=s.crn)");
+            rs.beforeFirst();
             while (rs.next()) {
                 cmbCRN.addItem(rs.getString("CRN")+" - "+rs.getString("Course_code"));
             }

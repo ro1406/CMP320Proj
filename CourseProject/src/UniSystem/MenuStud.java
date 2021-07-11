@@ -7,7 +7,7 @@ package UniSystem;
 
 /**
  *
- * @author wissam
+ * @author rohan
  */
 public class MenuStud extends javax.swing.JFrame {
 

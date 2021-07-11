@@ -7,7 +7,7 @@ package UniSystem;
 
 /**
  *
- * @author wissam
+ * @author prem
  */
 public class MenuAdmin extends javax.swing.JFrame {
 

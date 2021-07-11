@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 /**
  *
- * @author wissam
+ * @author rohan
  */
 public class AddCourseStud extends javax.swing.JFrame {
 

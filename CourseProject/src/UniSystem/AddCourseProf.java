@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 /**
  *
- * @author wissam
+ * @author rohan
  */
 public class AddCourseProf extends javax.swing.JFrame {
 
@@ -26,8 +26,8 @@ public class AddCourseProf extends javax.swing.JFrame {
      * Creates new form AddEmployee
      */
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00085023";
-    String DBPASS = "b00085023";
+    String DBUSER = "b00061555";
+    String DBPASS = "b00061555";
 
     Connection con;
     Statement statement;
