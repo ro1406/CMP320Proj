@@ -59,6 +59,37 @@ public class AddCourseStud extends javax.swing.JFrame {
 
     }
 
+    private void calculateTotalGradeCredit(){
+        rs = statement.executeQuery("select sum(c.credits) sumc" +
+                                    " from students_grades sg, courses c, courses_sections cs" +
+                                    " where c.course_code = cs.course_code and cs.crn = sg.crn and sg.sid = " + currUser);
+        rs.beforeFirst();
+        rs.next();
+        int totalCredits = rs.getInt("sumc");
+
+        rs = statement.executeQuery("select sg.grade, c.credits" +
+                                    " from students_grades sg, courses c, courses_sections cs" +
+                                    " where c.course_code = cs.course_code and cs.crn = sg.crn and sg.sid = " + currUser);
+        double totalGrade = 0.0;
+        rs.beforeFirst();
+        while(rs.next()){
+            totalGrade += rs.getDouble("grade") * (rs.getInt("credits")/totalCredits);
+        }
+        totalGrade = (totalGrade/100)*4;
+
+        String currentStanding;
+        if (credits > 12) currentStanding = "Senior";
+        else if (credits > 12) currentStanding = "Junior";
+        else if (credits > 12) currentStanding = "Sophomore";
+        else currentStanding = "Freshman";
+
+        rs = statement.executeQuery("update students set gpa = " + totalGrade +
+                                    ", credits = " + totalCredits +
+                                    ", standing = " + currentStanding +
+                                    " where sid = " + currUser);
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -235,6 +266,7 @@ public class AddCourseStud extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error adding course.");
         }
+        calculateTotalGradeCredit();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void ConfirmCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmCourseActionPerformed

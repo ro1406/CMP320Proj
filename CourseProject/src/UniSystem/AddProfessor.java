@@ -21,6 +21,7 @@ public class AddProfessor extends javax.swing.JFrame {
     
     Statement statement;
     PreparedStatement prepStatement;
+    PreparedStatement prepStatement2;
     ResultSet rs;
     /**
      * Creates new form AddProfessor
@@ -271,6 +272,11 @@ public class AddProfessor extends javax.swing.JFrame {
 
             if (isValidData()) {
                 prepStatement = mycon.getCon().prepareStatement("INSERT INTO professors (pid, name, sex, college, age) VALUES (?,?,?,?,?)");
+                prepStatement2 = mycon.getCon().prepareStatement("INSERT INTO users (username,password,name,type) VALUES (?,?,?,?)");                
+                prepStatement2.setString(1, "s"+pid);
+                prepStatement2.setString(2, "s"+pid);
+                prepStatement2.setString(3, txtName.getText());
+                prepStatement2.setInt(4, 2);
                 prepStatement.setInt(1, Integer.parseInt(txtID.getText()));
                 prepStatement.setString(2, txtName.getText());
                 if(cmbGender.getSelectedItem()=="Male")
