@@ -186,10 +186,12 @@ public class MenuStud extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
+        (new ViewGradesStudent(currUserId)).setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
+        (new ViewCoursesStudent(currUserId)).setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
 

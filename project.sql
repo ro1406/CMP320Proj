@@ -116,8 +116,8 @@ insert into courses values ('CAAD102','Introduction to Design 2',4);
 insert into courses values ('CAAD108','Design Project',2);
 
 insert into courses_sections values (11011,'CEN101',10,'Summer 2021','EB','8AM - 9AM');
-insert into courses_sections values (11012,'CEN101',20,'Summer 2021','EB','10AM - 11AM');
-insert into courses_sections values (12011,'CEN102',10,'Fall 2021','EB','12PM - 1PM');
+insert into courses_sections values (11012,'CEN102',20,'Summer 2021','EB','10AM - 11AM');
+insert into courses_sections values (12011,'CEN101',10,'Fall 2021','EB','12PM - 1PM');
 insert into courses_sections values (12012,'CEN102',20,'Fall 2021','EB','2PM - 3PM');
 
 insert into courses_prerequisites values ('CEN102','CEN101');
@@ -146,6 +146,7 @@ insert into students_grades values (79000,11012,77.0);
 
 commit;
 
+/*
 
 select sum(c.credits)
 from courses c, courses_sections cs, students_grades sg
@@ -163,3 +164,15 @@ select * from students_grades;
 select * from users;
 
 SELECT username, password, type FROM USERS WHERE username = 's80000' AND password = 's80000pwd';
+
+*/
+
+select c.course_code, c.course_name, c.credits
+from courses c, courses_sections cs, students_grades sg
+where c.course_code = cs.course_code and cs.crn = sg.crn and sg.sid = 80000
+order by course_name;
+
+select c.course_code, c.course_name, sg.grade
+from courses c, courses_sections cs, students_grades sg
+where c.course_code = cs.course_code and cs.crn = sg.crn and sg.sid = 80000
+order by course_name;
