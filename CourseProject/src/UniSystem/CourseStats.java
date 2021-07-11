@@ -46,12 +46,9 @@ public class CourseStats extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = statement.executeQuery("SELECT distinct s.CRN,s.course_code FROM professors_Courses p, courses_sections s " +
-                                        "WHERE p.course_code=s.course_code AND p.pid = "+currUserId+" AND " +
-                                        "EXISTS (SELECT CRN FROM students_grades WHERE CRN=s.crn)");
-            System.out.println("SELECT distinct s.CRN,s.course_code FROM professors_Courses p, courses_sections s " +
-                                        "WHERE p.course_code=s.course_code AND p.pid = "+currUserId+" AND " +
-                                        "EXISTS (SELECT CRN FROM students_grades WHERE CRN=s.crn)");
+            rs = statement.executeQuery("select crn, course_code" +
+                                         " from courses_sections" +
+                                         " where pid = " + currUserId);
             rs.beforeFirst();
             while (rs.next()) {
                 cmbCRN.addItem(rs.getString("CRN")+" - "+rs.getString("Course_code"));
@@ -246,9 +243,6 @@ public class CourseStats extends javax.swing.JFrame {
         System.out.println(crn);
         //FIND ALL STATS AND POPULATE LABELS:
         try{
-            System.out.println("SELECT MIN(Grade) as mini, MAX(Grade) as maxx, AVG(Grade) as avg, STDDEV(Grade) as std " +
-                                        "FROM students_grades WHERE CRN = "+crn);
-            
             rs = statement.executeQuery("SELECT MIN(Grade) as mini, MAX(Grade) as maxx, AVG(Grade) as avg, STDDEV(Grade) as std " +
                                         "FROM students_grades WHERE CRN = "+crn);
             
