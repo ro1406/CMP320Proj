@@ -26,8 +26,8 @@ public class StudentInfo extends javax.swing.JFrame {
      * Creates new form AddEmployee
      */
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00061555";
-    String DBPASS = "b00061555";
+    String DBUSER = "b00084833";
+    String DBPASS = "b00084833";
 
     Connection con;
     Statement statement;

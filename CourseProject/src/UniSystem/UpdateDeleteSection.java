@@ -29,24 +29,21 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         CRNError.setVisible(false);
+        CodeError.setVisible(false);
         SemError.setVisible(false);
         LocError.setVisible(false);
         TimeError.setVisible(false);
         try
-        {
-            rs = mycon.getstate().executeQuery("Select course_code from courses order by course_code");
-            while(rs.next())
-            {
-                cmbCode.addItem(rs.getString("course_code"));
-            }
-            
+        {   
             rs = mycon.getstate().executeQuery("Select pid from professors order by pid");
             while(rs.next())
             {
                 cmbProfID.addItem(rs.getString("pid"));
             }
             
-            rs.close();
+            rs = mycon.getstate().executeQuery("SELECT * FROM courses_sections ORDER BY crn ASC ");
+            getNewData();
+            //rs.close();
             
         } catch (SQLException e) {
             System.out.println(e);
@@ -70,7 +67,7 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
     private void populateFields() {
         try {
             txtCRN.setText(rs.getString("CRN"));
-            cmbCode.setSelectedItem(rs.getString("course_code"));
+            txtCode.setText(rs.getString("course_code"));
             cmbProfID.setSelectedItem(rs.getString("pid"));
             txtSem.setText(rs.getString("semester"));
             txtLoc.setText(rs.getString("location"));
@@ -226,9 +223,10 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
         Sem = new javax.swing.JLabel();
         Loc = new javax.swing.JLabel();
         Time = new javax.swing.JLabel();
-        cmbCode = new javax.swing.JComboBox<>();
         txtLoc = new javax.swing.JTextField();
         txtTime = new javax.swing.JTextField();
+        txtCode = new javax.swing.JTextField();
+        CodeError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -309,12 +307,21 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
         Time.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Time.setText("TIME:");
 
-        cmbCode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
         txtLoc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        txtTime.setEditable(false);
         txtTime.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimeActionPerformed(evt);
+            }
+        });
+
+        txtCode.setEditable(false);
+        txtCode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        CodeError.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        CodeError.setForeground(new java.awt.Color(255, 0, 0));
+        CodeError.setText("error label");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -346,8 +353,8 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
                                 .addComponent(btnNext))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtCode, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbProfID, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmbCode, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtCRN, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtSem, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTime, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -357,11 +364,12 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
                                     .addComponent(CRNError, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(SemError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(LocError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TimeError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(TimeError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(CodeError, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addComponent(UpdateDeleteStudent)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +384,8 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Code)
-                    .addComponent(cmbCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CodeError))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ProfID)
@@ -402,7 +411,7 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
                     .addComponent(btnDelete)
                     .addComponent(btnNext)
                     .addComponent(btnPrevious))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
         pack();
@@ -416,14 +425,13 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
             //            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             if (isValidData()) {
-                prepStatement = mycon.getCon().prepareStatement("UPDATE courses_sections course_code=?, pid=?, semester=?, location=?, time=? where crn = ?");
+                prepStatement = mycon.getCon().prepareStatement("UPDATE courses_sections set pid=?, semester=?, location=?, time=? where crn = ?");
 
-                prepStatement.setString(1, cmbCode.getSelectedItem().toString());
-                prepStatement.setString(2, cmbProfID.getSelectedItem().toString());
-                prepStatement.setString(3, txtSem.getText());
-                prepStatement.setString(4, txtLoc.getText());
-                prepStatement.setString(5, txtTime.getText());
-                prepStatement.setInt(6, Integer.parseInt(txtCRN.getText()));
+                prepStatement.setString(1, cmbProfID.getSelectedItem().toString());
+                prepStatement.setString(2, txtSem.getText());
+                prepStatement.setString(3, txtLoc.getText());
+                prepStatement.setString(4, txtTime.getText());
+                prepStatement.setInt(5, Integer.parseInt(txtCRN.getText()));
 
                 int result = prepStatement.executeUpdate();
                 if (result > 0) {
@@ -483,10 +491,15 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
         MovePrevious();
     }//GEN-LAST:event_btnPreviousActionPerformed
 
+    private void txtTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CRNError;
     private javax.swing.JLabel CRNNo;
     private javax.swing.JLabel Code;
+    private javax.swing.JLabel CodeError;
     private javax.swing.JLabel Loc;
     private javax.swing.JLabel LocError;
     private javax.swing.JLabel ProfID;
@@ -499,9 +512,9 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> cmbCode;
     private javax.swing.JComboBox<String> cmbProfID;
     private javax.swing.JTextField txtCRN;
+    private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtLoc;
     private javax.swing.JFormattedTextField txtSem;
     private javax.swing.JTextField txtTime;

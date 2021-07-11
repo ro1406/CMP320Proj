@@ -34,10 +34,11 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
         CreditsError.setVisible(false);
         try
         {
-            rs = mycon.getstate().executeQuery("select * from courses order by course_name");
+            rs = mycon.getstate().executeQuery("select * from courses c left outer join courses_prerequisites cp on c.course_code=cp.course_code order by c.course_code");
+            cmbPreReq.addItem("no prerequisites");
             while(rs.next())
             {
-                cmbPreReq.addItem(rs.getString("course_name"));
+                cmbPreReq.addItem(rs.getString("course_code"));
             }
             //rs.close();
         }
@@ -50,8 +51,7 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
     private void getNewData() {
 
         try {
-            String str;
-            rs = mycon.getstate().executeQuery("SELECT * FROM courses ORDER BY course_name ASC ");
+            rs = mycon.getstate().executeQuery("select * from courses c left outer join courses_prerequisites cp on c.course_code=cp.course_code order by c.course_code");
             rs.beforeFirst();
             rs.first();
             populateFields();
@@ -67,10 +67,11 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
             txtCode.setText(rs.getString("course_code"));
             txtName.setText(rs.getString("course_name"));
             txtCredits.setText(rs.getString("credits"));
-            rs2 = mycon.getstate().executeQuery("SELECT prereq_code FROM courses_prerequisites WHERE course_code = '" + rs.getString("course_code") + "'");
-            rs2.beforeFirst();
-            if (rs2.next())
-                cmbPreReq.setSelectedItem(rs2.getString("prereq_code"));
+            System.out.println(rs.getString("prereq_code"));
+            if(rs.getString("prereq_code")==null)
+                cmbPreReq.setSelectedItem("no prerequisites");
+            else
+                cmbPreReq.setSelectedItem(rs.getString("prereq_code"));
             EnableDisableButtons();
         } catch (SQLException ex) {
             Logger.getLogger(UpdateDeleteCourses.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,7 +100,6 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
             // TODO add your handling code here:
 
             if (!rs.isLast()) {
-
                 rs.next();
                 populateFields();
             }
@@ -172,13 +172,13 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
             result = false;
         }
 
-        if (txtCredits.getText().trim().isEmpty() || !(isInteger(txtCredits.getText().trim())) || (Integer.parseInt(txtCredits.getText().trim()) < 1) || (Integer.parseInt(txtCredits.getText().trim()) > 6) ) {
+        if (txtCredits.getText().trim().isEmpty() || !(isInteger(txtCredits.getText().trim())) || (Integer.parseInt(txtCredits.getText().trim()) < 1) || (Integer.parseInt(txtCredits.getText().trim()) > 4) ) {
             if (txtCredits.getText().trim().isEmpty()) {
                 CreditsError.setText("Invalid. Cannot be empty.");
             } else if (!(isInteger(txtCredits.getText().trim()))) {
                 CreditsError.setText("Invalid. Must be an integer number.");
-            } else if ((Integer.parseInt(txtCredits.getText().trim()) < 1) || (Integer.parseInt(txtCredits.getText().trim()) > 6)) {
-                CreditsError.setText("Invalid. Must be between 1 and 6");
+            } else if ((Integer.parseInt(txtCredits.getText().trim()) < 1) || (Integer.parseInt(txtCredits.getText().trim()) > 4)) {
+                CreditsError.setText("Invalid. Must be between 1 and 4");
             }
             CreditsError.setVisible(true);
             result = false;
@@ -311,11 +311,12 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnNext))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cmbPreReq, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCode, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtCredits, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cmbPreReq, javax.swing.GroupLayout.Alignment.LEADING, 0, 200, Short.MAX_VALUE)
+                                        .addComponent(txtCode, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtCredits, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(CodeError, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
