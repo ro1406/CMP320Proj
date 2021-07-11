@@ -40,7 +40,7 @@ public class AddCourseStud extends javax.swing.JFrame {
         currUser=id;
         cmbCRN.setVisible(false);
         jLabel6.setVisible(false);
-        
+        cmbGrades.setVisible(false);
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
@@ -80,6 +80,8 @@ public class AddCourseStud extends javax.swing.JFrame {
         cmbCRN = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         ConfirmCourse = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        cmbGrades = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add New Employee");
@@ -125,6 +127,11 @@ public class AddCourseStud extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("Grade:");
+
+        cmbGrades.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,7 +149,8 @@ public class AddCourseStud extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -156,9 +164,10 @@ public class AddCourseStud extends javax.swing.JFrame {
                                     .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(ConfirmCourse)))
-                            .addComponent(cmbCRN, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cmbCRN, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbGrades, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
+                        .addGap(218, 218, 218)
                         .addComponent(btnAdd)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -166,7 +175,7 @@ public class AddCourseStud extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblEmpnoError))
@@ -183,11 +192,15 @@ public class AddCourseStud extends javax.swing.JFrame {
                     .addComponent(ConfirmCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbCRN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(cmbCRN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cmbGrades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(btnAdd)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,10 +214,10 @@ public class AddCourseStud extends javax.swing.JFrame {
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             
             
-            prepStatement = con.prepareStatement("INSERT INTO student_grade (StudID,CRN) VALUES(?,?) ");
+            prepStatement = con.prepareStatement("INSERT INTO student_grade (SID,CRN,grade) VALUES(?,?,?) ");
             prepStatement.setInt(1, currUser);
             prepStatement.setString(2, cmbCRN.getSelectedItem().toString());
-            
+            prepStatement.setDouble(3, Double.parseDouble(cmbGrades.getSelectedItem().toString()));
             int result = prepStatement.executeUpdate();
             if (result > 0) {
 
@@ -227,12 +240,18 @@ public class AddCourseStud extends javax.swing.JFrame {
     private void ConfirmCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmCourseActionPerformed
         jLabel6.setVisible(true);
         cmbCRN.setVisible(true);
+        cmbGrades.setVisible(true);
         try{
             rs = statement.executeQuery("SELECT CRN FROM Sections WHERE Course_code = '"+cmbCourse.getSelectedItem().toString()+"'");
             rs.beforeFirst();
             while(rs.next()){
                 cmbCRN.addItem(rs.getString("CRN"));
             }
+            String arr[]={"4","3.7","3.3","3.0","2.7","2.3","2.0","1.7","1.0","0.0"};
+            for(String x:arr){
+                cmbGrades.addItem(x);
+            }
+            
         }
         catch (SQLException e) {JOptionPane.showMessageDialog(null, "Error adding new employee.");}
     }//GEN-LAST:event_ConfirmCourseActionPerformed
@@ -243,12 +262,14 @@ public class AddCourseStud extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JComboBox<String> cmbCRN;
     private javax.swing.JComboBox<String> cmbCourse;
+    private javax.swing.JComboBox<String> cmbGrades;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lblEmpnoError;
     private javax.swing.JLabel lblEnameError;
     // End of variables declaration//GEN-END:variables
