@@ -205,7 +205,7 @@ public class UpdateDeleteProf extends javax.swing.JFrame {
         cmbCollege = new javax.swing.JComboBox<>();
         txtName = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update/Delete Professor");
 
         cmbGender.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

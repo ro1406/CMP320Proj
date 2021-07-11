@@ -34,12 +34,12 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
         CreditsError.setVisible(false);
         try
         {
-            rs = mycon.getstate().executeQuery("select course_name from courses order by course_name");
+            rs = mycon.getstate().executeQuery("select * from courses order by course_name");
             while(rs.next())
             {
                 cmbPreReq.addItem(rs.getString("course_name"));
             }
-            rs.close();
+            //rs.close();
         }
         catch (SQLException e) {
             System.out.println(e);
@@ -67,12 +67,10 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
             txtCode.setText(rs.getString("course_code"));
             txtName.setText(rs.getString("course_name"));
             txtCredits.setText(rs.getString("credits"));
-            rs2 = mycon.getstate().executeQuery("SELECT * FROM courses_prerequisites ORDER BY course_name ASC ");
-            while(rs2.next())
-            {
-                if(rs2.getString("course_name").equals(rs.getString("course_name")))
-                    cmbPreReq.setSelectedItem(rs2.getString("prereq_code"));
-            }
+            rs2 = mycon.getstate().executeQuery("SELECT prereq_code FROM courses_prerequisites WHERE course_code = '" + rs.getString("course_code") + "'");
+            rs2.beforeFirst();
+            if (rs2.next())
+                cmbPreReq.setSelectedItem(rs2.getString("prereq_code"));
             EnableDisableButtons();
         } catch (SQLException ex) {
             Logger.getLogger(UpdateDeleteCourses.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,7 +213,7 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         cmbPreReq = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update/Delete Course");
 
         txtCode.setEditable(false);

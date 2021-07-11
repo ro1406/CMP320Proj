@@ -230,7 +230,7 @@ public class UpdateDeleteSection extends javax.swing.JFrame {
         txtLoc = new javax.swing.JTextField();
         txtTime = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         cmbProfID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 

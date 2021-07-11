@@ -278,7 +278,7 @@ public class UpdateDeleteStudent extends javax.swing.JFrame {
 
         txtComm1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update/Delete Student");
 
         CreditsError.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
