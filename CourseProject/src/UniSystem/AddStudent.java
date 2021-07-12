@@ -121,7 +121,7 @@ public class AddStudent extends javax.swing.JFrame {
             result = false;
         }
 
-        if (txtName.getText().trim().isEmpty() || (txtName.getText().trim().length() > 10)) {
+        if (txtName.getText().isEmpty() || (txtName.getText().trim().length() > 10)) {
             if (txtName.getText().trim().isEmpty()) {
                 NameError.setText("Invalid. Cannot be empty.");
             } else if ((txtName.getText().trim().length() > 50)) {

@@ -144,7 +144,7 @@ public class ViewGradesStudent extends javax.swing.JFrame {
         txtGrade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Update/Delete Course");
+        setTitle("View Course Grades");
 
         txtCode.setEditable(false);
         txtCode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

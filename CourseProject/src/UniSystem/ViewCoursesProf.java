@@ -88,7 +88,7 @@ public class ViewCoursesProf extends javax.swing.JFrame {
         txtCN = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Update/Delete Employee");
+        setTitle("View Courses");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Courses Taught");

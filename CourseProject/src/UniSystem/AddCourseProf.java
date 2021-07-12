@@ -78,7 +78,7 @@ public class AddCourseProf extends javax.swing.JFrame {
         lblEnameError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add New Employee");
+        setTitle("Add New Course");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Add Course");
