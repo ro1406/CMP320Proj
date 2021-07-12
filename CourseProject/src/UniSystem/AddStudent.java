@@ -206,7 +206,7 @@ public class AddStudent extends javax.swing.JFrame {
         cmbGender = new javax.swing.JComboBox<>();
         txtAdmitTerm = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add New Student");
 
         Name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
