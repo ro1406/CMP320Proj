@@ -43,7 +43,8 @@ public class AddCourseProf extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = statement.executeQuery("SELECT * FROM professors_courses where pid= " +currUser);
+            rs = statement.executeQuery("SELECT c.course_code FROM courses c where course_code" + 
+                                        " NOT IN (select pc.course_code from professors_courses pc where pid = " + id + ")");
             // populate Course combo box
             while (rs.next()) {
                 cmbCourse.addItem(rs.getString("Course_code"));
