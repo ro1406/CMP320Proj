@@ -1,3 +1,12 @@
+drop table users;
+drop table students_grades;
+drop table professors_courses;
+drop table courses_prerequisites;
+drop table courses_sections;
+drop table courses;
+drop table professors;
+drop table students;
+
 create table users (
     username varchar2(25)           constraint usr_pk primary key,
     password varchar2 (25),
@@ -58,40 +67,42 @@ create table students_grades(
                                     constraint std_grd_pk primary key (sid,crn)
 );
 
-insert into users values ('admin','adminpwd','Adminstrator',0);
+insert into users values ('admin','admin','Adminstrator',0);
 
-insert into users values ('s70000','s70000pwd','Braiden Lane',1);
+commit;
+
+insert into users values ('s70000','s70000','Braiden Lane',1);
 insert into students values (70000,'Braiden Lane','M','Fall 2019','CEN',30,'Junior',3.0);
-insert into users values ('s71000','s71000pwd','Rajveer Whitehouse',1);
+insert into users values ('s71000','s71000','Rajveer Whitehouse',1);
 insert into students values (71000,'Rajveer Whitehouse','M','Fall 2018','CEN',60,'Senior',3.0);
-insert into users values ('s72000','s72000pwd','Matt Goodman',1);
+insert into users values ('s72000','s72000','Matt Goodman',1);
 insert into students values (72000,'Matt Goodman','M','Fall 2018','CEN',100,'Senior',2.6);
-insert into users values ('s73000','s73000pwd','Reyansh Palmer',1);
+insert into users values ('s73000','s73000','Reyansh Palmer',1);
 insert into students values (73000,'Reyansh Palmer','M','Spring 2018','CEN',85,'Senior',2.9);
-insert into users values ('s74000','s74000pwd','Aahil Jaramillo',1);
+insert into users values ('s74000','s74000','Aahil Jaramillo',1);
 insert into students values (74000,'Aahil Jaramillo','M','Fall 2020','CEN',60,'Sophomore',3.5);
-insert into users values ('s75000','s75000pwd','Najma Galvan',1);
+insert into users values ('s75000','s75000','Najma Galvan',1);
 insert into students values (75000,'Najma Galvan','F','Fall 2020','CEN',60,'Junior',3.6);
-insert into users values ('s76000','s76000pwd','Rhona Woods',1);
+insert into users values ('s76000','s76000','Rhona Woods',1);
 insert into students values (76000,'Rhona Woods','F','Fall 2020','CEN',60,'Junior',3.1);
-insert into users values ('s77000','s77000pwd','Maria Shaffer',1);
+insert into users values ('s77000','s77000','Maria Shaffer',1);
 insert into students values (77000,'Maria Shaffer','F','Fall 2021','CEN',30,'Sophomore',2.9);
-insert into users values ('s78000','s78000pwd','Hafsah Gough',1);
+insert into users values ('s78000','s78000','Hafsah Gough',1);
 insert into students values (78000,'Hafsah Gough','F','Fall 2021','CEN',30,'Sophomore',2.3);
-insert into users values ('s79000','s79000pwd','Mathilda Conway',1);
+insert into users values ('s79000','s79000','Mathilda Conway',1);
 insert into students values (79000,'Mathilda Conway','F','Spring 2020','CEN',0,'Freshman',0.0);
-insert into users values ('s80000','s80000pwd','Tester McTester',1);
+insert into users values ('s80000','s80000','Tester McTester',1);
 insert into students values (80000,'Tester McTester','M','Spring 2020','CEN',0,'Freshman',0.0);
 
-insert into users values ('p10','p10pwd','Jo Romero',2);
+insert into users values ('p10','p10','Jo Romero',2);
 insert into professors values (10,'Jo Romero','M','CEN',35);
-insert into users values ('p20','p20pwd','Evelina Mason',2);
+insert into users values ('p20','p20','Evelina Mason',2);
 insert into professors values (20,'Evelina Mason','F','CEN',45);
-insert into users values ('p30','p30pwd','Sam Wilkins',2);
+insert into users values ('p30','p30','Sam Wilkins',2);
 insert into professors values (30,'Sam Wilkins','M','CAS',37);
-insert into users values ('p40','p40pwd','Harry Freeman',2);
+insert into users values ('p40','p40','Harry Freeman',2);
 insert into professors values (40,'Harry Freeman','M','CAS',40);
-insert into users values ('p50','p50pwd','Tayah Allen',2);
+insert into users values ('p50','p50','Tayah Allen',2);
 insert into professors values (50,'Tayah Allen','M','SBA',33);
 
 insert into courses values ('CEN101','Introduction to Engineering 1',3);
