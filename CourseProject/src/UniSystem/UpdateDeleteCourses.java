@@ -43,7 +43,7 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
             //rs.close();
         }
         catch (SQLException e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
         }
         getNewData();
     }
@@ -67,7 +67,6 @@ public class UpdateDeleteCourses extends javax.swing.JFrame {
             txtCode.setText(rs.getString("course_code"));
             txtName.setText(rs.getString("course_name"));
             txtCredits.setText(rs.getString("credits"));
-            System.out.println(rs.getString("prereq_code"));
             if(rs.getString("prereq_code")==null)
                 cmbPreReq.setSelectedItem("no prerequisites");
             else

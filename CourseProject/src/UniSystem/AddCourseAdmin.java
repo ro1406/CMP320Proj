@@ -44,7 +44,7 @@ public class AddCourseAdmin extends javax.swing.JFrame {
             rs.close();
         }
         catch (SQLException e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }
     
